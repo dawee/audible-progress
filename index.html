@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title>Audible Progress</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-duration-picker@latest/dist/html-duration-picker.min.js"></script>
+  </head>
+  <body>
+    <h1>Audible Progress</h1>
+
+    <form action="#">
+      <input class="html-duration-picker" name="progress" id="progress" />
+      <input class="html-duration-picker" name="total" id="total" />
+      <input type="submit" id="submit" />
+    </form>
+    <script>
+      function getDuration(id) {
+        return moment.duration(document.getElementById(id).value).asSeconds();
+      }
+
+      document.getElementById("submit").addEventListener("click", (ev) => {
+        let progress = getDuration("progress");
+        let total = getDuration("total");
+
+        alert(`Progress: ${Math.round((progress * 100) / total)}%`);
+
+        ev.preventDefault();
+        return false;
+      });
+
+      var total = moment.duration("10:22:01").asSeconds();
+      var progress = moment.duration("00:50:00").asSeconds();
+
+      console.log((progress * 100) / total);
+    </script>
+  </body>
+</html>
